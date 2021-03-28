@@ -1,0 +1,26 @@
+version: '3'
+services:
+    database:
+        image: postgres
+        environment:
+            POSTGRES_PASSWORD: "toor"
+        volumes:
+            - ./init.sql:/docker-entrypoint-initdb.d/1-init.sql
+            - postgres_data:/var/lib/postgresql/data/
+    crawler:
+        image: docker.pkg.github.com/itsecuritymonitor/newscrawlerapi/newscrawlerapi:latest
+    web:
+        image: docker.pkg.github.com/itsecuritymonitor/itsecuritynewsmonitor/image:latest
+        ports:
+            - "80:80"
+            - "443:443"
+        environment: 
+            Email:Smtp:Host: "<smtp host here>"
+            Email:Smtp:Port: "<smtp port here>"
+            Email:Smtp:User: "<smtp username here>"
+            Email:Smtp:Pass: "<smtp password here>"
+        depends_on:
+            - "database"
+            - "crawler"
+        command: ["./wait-for-postgres.sh", "database:5432", "toor", "dotnet", "ITSecurityNewsMonitor.dll"]
+    
