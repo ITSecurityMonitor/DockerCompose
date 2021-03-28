@@ -19,5 +19,5 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         port: ${{ secrets.SSH_PORT }}
         source: "./docker-compose.yml,./init.sql,./wait-for-postgres.sh"
-        target: "test"
+        target: "security_news_monitor"
         
