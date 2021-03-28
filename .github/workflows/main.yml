@@ -18,27 +18,6 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         key: ${{ secrets.SSH_KEY }}
         port: ${{ secrets.SSH_PORT }}
-        source: "docker-compose.yml"
-        target: "docker-compose.yml"
+        source: "./docker-compose.yml,./init.sql,./wait-for-postgres.sh"
+        target: "test"
         
-    - uses: actions/checkout@master
-    - name: copy init.sql
-      uses: appleboy/scp-action@master
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USERNAME }}
-        key: ${{ secrets.SSH_KEY }}
-        port: ${{ secrets.SSH_PORT }}
-        source: "init.sql"
-        target: "init.sql"
-        
-    - uses: actions/checkout@master
-    - name: copy docker-compose.yml
-      uses: appleboy/scp-action@master
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USERNAME }}
-        key: ${{ secrets.SSH_KEY }}
-        port: ${{ secrets.SSH_PORT }}
-        source: "wait-for-postgres.sh"
-        target: "wait-for-postgres.sh"   
