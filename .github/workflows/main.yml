@@ -27,6 +27,13 @@ jobs:
     steps:
     - name: executing remote ssh commands using ssh key
       uses: appleboy/ssh-action@master
+      env: 
+        Email:Smtp:Host: "<smtp host here>"
+        Email:Smtp:Port: "<smtp port here>"
+        Email:Smtp:User: "<smtp username here>"
+        Email:Smtp:Pass: "<smtp password here>"
+        DefaultUser:Name: ${{ secrets.DEFAULT_USER }}
+        DefaultUser:Password: ${{ secrets.DEFAULT_PASSWORD }}
       with:
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USERNAME }}

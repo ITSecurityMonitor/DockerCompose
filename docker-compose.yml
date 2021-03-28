@@ -14,11 +14,6 @@ services:
         ports:
             - "8080:80"
             - "8443:443"
-        environment: 
-            Email:Smtp:Host: "<smtp host here>"
-            Email:Smtp:Port: "<smtp port here>"
-            Email:Smtp:User: "<smtp username here>"
-            Email:Smtp:Pass: "<smtp password here>"
         depends_on:
             - "database"
             - "crawler"
