@@ -22,5 +22,6 @@ services:
         depends_on:
             - "database"
             - "crawler"
-        command: ["./wait-for-postgres.sh", "database:5432", "toor", "dotnet", "ITSecurityNewsMonitor.dll"]
+        # command: ["./wait-for-postgres.sh", "database:5432", "toor", "dotnet", "ITSecurityNewsMonitor.dll"]
+        command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; dotnet ITSecurityNewsMonitor.dll'
     
